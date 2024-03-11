@@ -263,7 +263,7 @@ class JGlobalDatePicker extends StatelessWidget {
                           if (pickerType == PickerType.JHijri)
                             JCalendarDatePicker(
                               initialDate: jCheckDate(selectedDate),
-                              localeCode: locale?.languageCode ?? "en",
+                              localeCode: locale?.languageCode ?? "ar",
                               firstDate: jCheckDate(startDate),
                               initialCalendarMode:
                                   pickerMode ?? DatePickerMode.day,

@@ -906,6 +906,7 @@ class _JMonthPickerState extends State<_JMonthPicker> {
                   onPressed:
                       _isDisplayingFirstMonth ? null : _handlePreviousMonth,
                 ),
+                Text(widget.currentDate.year.toString()),
                 IconButton(
                   icon: const Icon(Icons.chevron_right),
                   color: controlColor,

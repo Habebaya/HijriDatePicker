@@ -107,56 +107,28 @@ class HomePage extends StatelessWidget {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          Expanded(
-              child: ListView(
-            children: [
-              JGlobalDatePicker(
-                widgetType: WidgetType.JContainer,
-                pickerType: PickerType.JHijri,
-                buttons: const SizedBox(),
-                primaryColor: Colors.blue,
-                calendarTextColor: Colors.white,
-                backgroundColor: Colors.black,
-                borderRadius: const Radius.circular(10),
-                headerTitle: const Center(
-                  child: Text("التقويم الهجري"),
-                ),
-                startDate: JDateModel(dateTime: DateTime.parse("1984-12-24")),
-                selectedDate: JDateModel(dateTime: DateTime.now()),
-                endDate: JDateModel(dateTime: DateTime.parse("2030-09-20")),
-                pickerMode: DatePickerMode.day,
-                pickerTheme: Theme.of(context),
-                textDirection: TextDirection.rtl,
-                onChange: (val) {
-                  debugPrint(val.toString());
-                },
-              ),
-              const Divider(
-                color: Colors.blue,
-              ),
-              JGlobalDatePicker(
-                widgetType: WidgetType.JContainer,
-                pickerType: PickerType.JNormal,
-                buttons: const SizedBox(),
-                primaryColor: Colors.blue,
-                calendarTextColor: Colors.white,
-                backgroundColor: Colors.black,
-                borderRadius: const Radius.circular(10),
-                headerTitle: const Center(
-                  child: Text("التقويم الميلادي"),
-                ),
-                startDate: JDateModel(dateTime: DateTime.parse("1984-12-24")),
-                selectedDate: JDateModel(dateTime: DateTime.now()),
-                endDate: JDateModel(dateTime: DateTime.parse("2030-09-20")),
-                pickerMode: DatePickerMode.day,
-                pickerTheme: Theme.of(context),
-                textDirection: TextDirection.rtl,
-                onChange: (val) {
-                  debugPrint(val.toString());
-                },
-              ),
-            ],
-          ))
+          JGlobalDatePicker(
+       widgetType: WidgetType.JContainer,
+            pickerType: PickerType.JHijri,
+            buttons: const SizedBox(),
+            primaryColor: Colors.blue,
+
+            calendarTextColor: Colors.black,
+            backgroundColor: Colors.transparent,
+            borderRadius: const Radius.circular(10),
+            headerTitle: const Center(
+              child: Text("التقويم الهجري"),
+            ),
+            startDate: JDateModel(dateTime: DateTime.parse("1984-12-24")),
+            selectedDate: JDateModel(dateTime: DateTime.now()),
+            endDate: JDateModel(dateTime: DateTime.parse("2030-09-20")),
+            pickerMode: DatePickerMode.day,
+            pickerTheme: Theme.of(context),
+            textDirection: TextDirection.rtl,
+            onChange: (val) {
+              debugPrint(val.toString());
+            },
+          ),
         ],
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );

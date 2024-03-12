@@ -15,14 +15,18 @@ enum PickerType {
 class JDateModel {
   JHijri? jhijri;
   DateTime? dateTime;
+
   JDateModel({this.dateTime, this.jhijri});
 }
 
 class JPickerValue {
   JHijri? _jHijri;
   DateTime? _dateTime;
+
   JHijri get jhijri => _jHijri ?? JHijri.now();
+
   DateTime get date => _dateTime ?? DateTime.now();
+
   JPickerValue.value(JDateModel data) {
     if (data.jhijri != null) {
       _jHijri = data.jhijri!;
@@ -35,6 +39,7 @@ class JPickerValue {
       }
     }
   }
+
   @override
   String toString() {
     return {
@@ -125,6 +130,7 @@ class _JLocalDirection extends StatelessWidget {
   final TextDirection? textDirection;
   final Locale? locale;
   final Widget child;
+
   const _JLocalDirection(
       {Key? key, this.textDirection, this.locale, required this.child})
       : super(key: key);
@@ -147,6 +153,7 @@ class _JLocalDirection extends StatelessWidget {
 class _WidgetType extends StatelessWidget {
   final Widget child;
   final WidgetType widgetType;
+
   const _WidgetType({Key? key, required this.widgetType, required this.child})
       : super(key: key);
 
@@ -195,6 +202,7 @@ class JGlobalDatePicker extends StatelessWidget {
   final Locale? locale;
   final SelectableDayPredicate? selectableDayPredicate;
   final JSelectableDayPredicate? jSelectableDayPredicate;
+
   const JGlobalDatePicker(
       {Key? key,
       this.pickerType = PickerType.JHijri,
@@ -263,7 +271,7 @@ class JGlobalDatePicker extends StatelessWidget {
                           if (pickerType == PickerType.JHijri)
                             JCalendarDatePicker(
                               initialDate: jCheckDate(selectedDate),
-                              localeCode: locale?.languageCode ?? "ar",
+                                  localeCode: locale?.languageCode ?? "en",
                               firstDate: jCheckDate(startDate),
                               initialCalendarMode:
                                   pickerMode ?? DatePickerMode.day,

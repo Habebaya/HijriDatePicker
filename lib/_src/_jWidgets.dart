@@ -269,23 +269,32 @@ class JGlobalDatePicker extends StatelessWidget {
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           if (pickerType == PickerType.JHijri)
-                            JCalendarDatePicker(
-                              initialDate: jCheckDate(selectedDate),
-                                  localeCode: locale?.languageCode ?? "en",
-                              firstDate: jCheckDate(startDate),
-                              initialCalendarMode:
-                                  pickerMode ?? DatePickerMode.day,
-                              lastDate: jCheckDate(endDate),
-                              selectableDayPredicate: jSelectableDayPredicate,
-                              onDateChanged: onChange != null
-                                  ? (dateTime) => onChange!(JPickerValue.value(
-                                      JDateModel(
-                                          jhijri: JHijri(
-                                              fDate: dateTime.dateTime))))
-                                  : (dateTime) => selected = JPickerValue.value(
-                                      JDateModel(
-                                          jhijri: JHijri(
-                                              fDate: dateTime.dateTime))),
+                            Stack(
+                              clipBehavior: Clip.none,
+                              fit: StackFit.loose,
+                              children: [
+
+                                JCalendarDatePicker(
+                                  initialDate: jCheckDate(selectedDate),
+                                      localeCode: locale?.languageCode ?? "ar",
+                                  firstDate: jCheckDate(startDate),
+                                  initialCalendarMode:
+                                      pickerMode ?? DatePickerMode.day,
+                                  lastDate: jCheckDate(endDate),
+                                  selectableDayPredicate: jSelectableDayPredicate,
+                                  onDateChanged: onChange != null
+                                      ? (dateTime) => onChange!(JPickerValue.value(
+                                          JDateModel(
+                                              jhijri: JHijri(
+                                                  fDate: dateTime.dateTime))))
+                                      : (dateTime) => selected = JPickerValue.value(
+                                          JDateModel(
+                                              jhijri: JHijri(
+                                                  fDate: dateTime.dateTime))),
+                                ),
+
+
+                              ],
                             ),
                           if (pickerType == PickerType.JNormal)
                             CalendarDatePicker(

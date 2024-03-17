@@ -1,3 +1,4 @@
+import 'package:date_format/date_format.dart';
 import 'package:flutter/material.dart';
 import 'package:jhijri/jHijri.dart';
 import 'package:jhijri_picker/jhijri_picker.dart';
@@ -111,14 +112,14 @@ class HomePage extends StatelessWidget {
        widgetType: WidgetType.JContainer,
             pickerType: PickerType.JHijri,
             buttons: const SizedBox(),
-            primaryColor: Colors.blue,
-
+            primaryColor: Colors.red,
             calendarTextColor: Colors.black,
-            backgroundColor: Colors.transparent,
+            backgroundColor: Colors.transparent
+            ,
             borderRadius: const Radius.circular(10),
-            headerTitle: const Center(
-              child: Text("التقويم الهجري"),
-            ),
+            // headerTitle: const Center(
+            //   child: Text("التقويم الهجري"),
+            // ),
             startDate: JDateModel(dateTime: DateTime.parse("1984-12-24")),
             selectedDate: JDateModel(dateTime: DateTime.now()),
             endDate: JDateModel(dateTime: DateTime.parse("2030-09-20")),
@@ -127,8 +128,31 @@ class HomePage extends StatelessWidget {
             textDirection: TextDirection.rtl,
             onChange: (val) {
               debugPrint(val.toString());
+              print(val.date);
             },
           ),
+          // JGlobalDatePicker(
+          //   widgetType: WidgetType.JContainer,
+          //   pickerType: PickerType.JNormal,
+          //   buttons: const SizedBox(),
+          //   primaryColor: Colors.red,
+          //   calendarTextColor: Colors.black,
+          //   backgroundColor: Colors.transparent
+          //   ,
+          //   borderRadius: const Radius.circular(10),
+          //   // headerTitle: const Center(
+          //   //   child: Text("التقويم الهجري"),
+          //   // ),
+          //   startDate: JDateModel(dateTime: DateTime.parse("1984-12-24")),
+          //   selectedDate: JDateModel(dateTime: DateTime.now()),
+          //   endDate: JDateModel(dateTime: DateTime.parse("2030-09-20")),
+          //   pickerMode: DatePickerMode.day,
+          //   pickerTheme: Theme.of(context),
+          //   textDirection: TextDirection.rtl,
+          //   onChange: (val) {
+          //     debugPrint(val.toString());
+          //   },
+          // ),
         ],
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );

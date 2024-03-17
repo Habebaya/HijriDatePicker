@@ -149,9 +149,7 @@ class _JCalendarDatePickerState extends State<JCalendarDatePicker> {
   @override
   void initState() {
     super.initState();
-    final DateTime currentDisplayedDate = DateTime.now();
 
-    _currentDisplayedMonthDateM = DateTime(currentDisplayedDate.year, currentDisplayedDate.month);
 
     _mode = widget.initialCalendarMode;
     _currentDisplayedMonthDate = JHijri(
@@ -159,6 +157,11 @@ class _JCalendarDatePickerState extends State<JCalendarDatePicker> {
             fMonth: widget.initialDate.month,
             fDay: widget.initialDate.day)
         .hijri;
+    _currentDisplayedMonthDateM = JHijri(
+        fYear: widget.initialDate.year,
+        fMonth: widget.initialDate.month,
+        fDay: widget.initialDate.day)
+        .dateTime;
     _selectedDate = widget.initialDate;
   }
 
@@ -317,7 +320,7 @@ class _JCalendarDatePickerState extends State<JCalendarDatePicker> {
                 ? DatePickerMode.year
                 : DatePickerMode.day);
           },
-          monthInMelady:_localizations.formatMonthYear(_currentDisplayedMonthDateM),
+          monthInMelady:_localizations.formatFullDate(_currentDisplayedMonthDateM),
         ),
 
       ],
@@ -1320,7 +1323,7 @@ class _JDayPickerGridDelegate extends SliverGridDelegate {
       childMainAxisExtent: tileHeight,
       crossAxisCount: columnCount,
       crossAxisStride: tileWidth,
-      mainAxisStride: tileHeight,
+      mainAxisStride: 50,
       reverseCrossAxis: axisDirectionIsReversed(constraints.crossAxisDirection),
     );
   }

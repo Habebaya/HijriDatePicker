@@ -320,7 +320,7 @@ class _JCalendarDatePickerState extends State<JCalendarDatePicker> {
                 ? DatePickerMode.year
                 : DatePickerMode.day);
           },
-          monthInMelady:_localizations.formatFullDate(_currentDisplayedMonthDateM),
+          monthInMelady:_localizations.formatMonthYear(_currentDisplayedMonthDate.dateTime),
         ),
 
       ],
@@ -597,6 +597,7 @@ class _JMonthPicker extends StatefulWidget {
   /// Called when the user navigates to a new month.
   final ValueChanged<HijriDate> onDisplayedMonthChanged;
 
+
   /// Optional user supplied predicate function to customize selectable days.
   final JSelectableDayPredicate? selectableDayPredicate;
 
@@ -676,9 +677,7 @@ class _JMonthPickerState extends State<_JMonthPicker> {
 
   /// The value for `delta` would be `7`.
   static int _monthDelta(HijriDate startDate, HijriDate endDate) {
-    return (endDate.year - startDate.year) * 12 +
-        endDate.month -
-        startDate.month;
+    return (endDate.year - startDate.year) * 12 + endDate.month - startDate.month;
   }
 
   /// Add months to a month truncated date.
@@ -696,6 +695,7 @@ class _JMonthPickerState extends State<_JMonthPicker> {
   }
 
   void _handleMonthPageChanged(int monthPage) {
+
     setState(() {
       final HijriDate monthDate =
           _addMonthsToMonthDate(widget.firstDate, monthPage);
@@ -714,6 +714,7 @@ class _JMonthPickerState extends State<_JMonthPicker> {
           _textDirection,
         );
       }
+
     });
   }
 

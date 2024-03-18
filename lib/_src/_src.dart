@@ -105,6 +105,7 @@ class JCalendarDatePicker extends StatefulWidget {
 
   /// The initially selected [HijriDate] that the picker should display.
   final HijriDate initialDate;
+
   /// The earliest allowable [HijriDate] that the user can select.
   final HijriDate firstDate;
 
@@ -150,7 +151,6 @@ class _JCalendarDatePickerState extends State<JCalendarDatePicker> {
   void initState() {
     super.initState();
 
-
     _mode = widget.initialCalendarMode;
     _currentDisplayedMonthDate = JHijri(
             fYear: widget.initialDate.year,
@@ -158,9 +158,9 @@ class _JCalendarDatePickerState extends State<JCalendarDatePicker> {
             fDay: widget.initialDate.day)
         .hijri;
     _currentDisplayedMonthDateM = JHijri(
-        fYear: widget.initialDate.year,
-        fMonth: widget.initialDate.month,
-        fDay: widget.initialDate.day)
+            fYear: widget.initialDate.year,
+            fMonth: widget.initialDate.month,
+            fDay: widget.initialDate.day)
         .dateTime;
     _selectedDate = widget.initialDate;
   }
@@ -320,9 +320,9 @@ class _JCalendarDatePickerState extends State<JCalendarDatePicker> {
                 ? DatePickerMode.year
                 : DatePickerMode.day);
           },
-          monthInMelady:_localizations.formatMonthYear(_currentDisplayedMonthDate.dateTime),
+          monthInMelady: _localizations
+              .formatMonthYear(_currentDisplayedMonthDate.dateTime),
         ),
-
       ],
     );
   }
@@ -443,7 +443,6 @@ class _JDatePickerModeToggleButton extends StatefulWidget {
   /// The callback when the title is pressed.
   final VoidCallback onTitlePressed;
 
-
   final String month;
   final String monthInMelady;
 
@@ -487,8 +486,7 @@ class _JDatePickerModeToggleButtonState
     final ColorScheme colorScheme = Theme.of(context).colorScheme;
     final TextTheme textTheme = Theme.of(context).textTheme;
     final Color controlColor = colorScheme.onSurface.withOpacity(0.60);
-    final DateTime mDay =
-        JHijri(fYear: 2024, fMonth: 3).dateTime;
+    final DateTime mDay = JHijri(fYear: 2024, fMonth: 3).dateTime;
     return Center(
       child: Container(
         padding: const EdgeInsetsDirectional.only(start: 16, end: 16),
@@ -533,7 +531,8 @@ class _JDatePickerModeToggleButtonState
                   ),
                 ),
               ),
-              Text(widget.monthInMelady,
+              Text(
+                widget.monthInMelady,
                 overflow: TextOverflow.ellipsis,
                 style: textTheme.titleSmall?.copyWith(
                     color: controlColor, fontWeight: FontWeight.w700),
@@ -597,7 +596,6 @@ class _JMonthPicker extends StatefulWidget {
   /// Called when the user navigates to a new month.
   final ValueChanged<HijriDate> onDisplayedMonthChanged;
 
-
   /// Optional user supplied predicate function to customize selectable days.
   final JSelectableDayPredicate? selectableDayPredicate;
 
@@ -648,7 +646,6 @@ class _JMonthPickerState extends State<_JMonthPicker> {
     super.didChangeDependencies();
     _localizations = MaterialLocalizations.of(context);
     _textDirection = Directionality.of(context);
-
   }
 
   @override
@@ -677,7 +674,9 @@ class _JMonthPickerState extends State<_JMonthPicker> {
 
   /// The value for `delta` would be `7`.
   static int _monthDelta(HijriDate startDate, HijriDate endDate) {
-    return (endDate.year - startDate.year) * 12 + endDate.month - startDate.month;
+    return (endDate.year - startDate.year) * 12 +
+        endDate.month -
+        startDate.month;
   }
 
   /// Add months to a month truncated date.
@@ -695,7 +694,6 @@ class _JMonthPickerState extends State<_JMonthPicker> {
   }
 
   void _handleMonthPageChanged(int monthPage) {
-
     setState(() {
       final HijriDate monthDate =
           _addMonthsToMonthDate(widget.firstDate, monthPage);
@@ -714,7 +712,6 @@ class _JMonthPickerState extends State<_JMonthPicker> {
           _textDirection,
         );
       }
-
     });
   }
 
@@ -1074,10 +1071,27 @@ class _JDayPicker extends StatefulWidget {
 class _JDayPickerState extends State<_JDayPicker> {
   /// List of [FocusNode]s, one for each day of the month.
   late List<FocusNode> _dayFocusNodes;
+  late List<String> specialDate = [];
 
   @override
   void initState() {
     super.initState();
+    specialDate = [
+      "1/1",
+      "12/3",
+      "20/7",
+      "15/8",
+      "1/9",
+      "1/10",
+      "2/10",
+      "3/10",
+      "9/12",
+      '10/12',
+      "11/12",
+      "13/12",
+      "14/12"
+
+    ];
     final int daysInMonth = getDaysInAMonth(
         widget.displayedMonth.year, widget.displayedMonth.month);
     _dayFocusNodes = List<FocusNode>.generate(
@@ -1223,26 +1237,47 @@ class _JDayPickerState extends State<_JDayPicker> {
                     !widget.selectableDayPredicate!(dayToBuild));
         final bool isSelectedDay = _isSameDay(widget.selectedDate, dayToBuild);
         final bool isToday = _isSameDay(widget.currentDate, dayToBuild);
+        print(
+            "dayToCompare ${dayToBuild.month.toString() + "/" + dayToBuild.day.toString()}");
+        print("special ${specialDate.first}");
+        final exist = specialDate.contains(
+            dayToBuild.day.toString() + "/" + dayToBuild.month.toString());
+        print(exist);
 
         BoxDecoration? decoration;
         Color dayColor = enabledDayColor;
         if (isSelectedDay) {
           // The selected day gets a circle background highlight, and a
           // contrasting text color.
-          dayColor = selectedDayColor;
+          dayColor = dayColor;
           decoration = BoxDecoration(
-              color: selectedDayBackground,
+              // color: selectedDayBackground,
               shape: BoxShape.rectangle,
-              borderRadius: BorderRadius.circular(10));
+              border: Border.all(color: disabledDayColor),
+              borderRadius: BorderRadius.circular(5),
+
+          );
         } else if (isDisabled) {
           dayColor = disabledDayColor;
         } else if (isToday) {
           // The current day gets a different text color and a circle stroke
           // border.
-          dayColor = todayColor;
+          dayColor = selectedDayColor;
           decoration = BoxDecoration(
-            border: Border.all(color: todayColor),
+            color: todayColor,
+            // border: Border.all(color: todayColor),
+            shape: BoxShape.rectangle,borderRadius: BorderRadius.circular(10),
+          );
+        }
+       else if (isSelectedDay && isToday) {
+          // The selected day gets a circle background highlight, and a
+          // contrasting text color.
+          dayColor = selectedDayColor;
+          decoration = BoxDecoration(
+            color: selectedDayBackground,
             shape: BoxShape.rectangle,
+            borderRadius: BorderRadius.circular(10),
+
           );
         }
 
@@ -1250,15 +1285,32 @@ class _JDayPickerState extends State<_JDayPicker> {
             JHijri(fYear: year, fMonth: month, fDay: day).dateTime;
 
         Widget dayWidget = Container(
+
           decoration: decoration,
-          child: Center(
-            child: Column(
-              children: [
-                Text(localizations.formatDecimal(day),
-                    style: dayStyle.apply(color: dayColor)),
-                Text(formatDate(mDay, ['d']),
-                    style: dayStyle.apply(color: dayColor)),
-              ],
+          child: Container(
+            margin: EdgeInsets.only(bottom: 2,left: 2,right: 2),
+            decoration: BoxDecoration(
+                border: Border(
+                    bottom: exist
+                        ? BorderSide(
+                      //                   <--- left side
+                      color: Color(0xFF84B230),
+                      width: 3.0,
+                    )
+                        : BorderSide(
+                      //                   <--- left side
+                      color: Colors.transparent,
+                    ))
+            ),
+            child: Center(
+              child: Column(
+                children: [
+                  Text(localizations.formatDecimal(day),
+                      style: dayStyle.apply(color: dayColor)),
+                  Text(formatDate(mDay, ['d']),
+                      style: dayStyle.apply(color: dayColor)),
+                ],
+              ),
             ),
           ),
         );

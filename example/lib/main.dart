@@ -109,8 +109,35 @@ class HomePage extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           JGlobalDatePicker(
-       widgetType: WidgetType.JContainer,
+            specialDates:  [
+      "19/3",
+          "20/3",
+          "20/4",
+          "21/4",
+          ],
+            widgetType: WidgetType.JContainer,
             pickerType: PickerType.JHijri,
+            buttons: const SizedBox(),
+            primaryColor: Colors.red,
+            calendarTextColor: Colors.black,
+            backgroundColor: Colors.transparent,
+            borderRadius: const Radius.circular(10),
+            startDate: JDateModel(dateTime: DateTime.parse("1984-12-24")),
+            selectedDate: JDateModel(dateTime: DateTime.now()),
+            endDate: JDateModel(dateTime: DateTime.parse("2030-09-20")),
+            pickerMode: DatePickerMode.day,
+            pickerTheme: Theme.of(context),
+            textDirection: TextDirection.rtl,
+            onChange: (val) {
+              debugPrint("ad"+val.toString());
+              print("woww : ${val.date}");
+
+            },
+
+          ),
+          JGlobalDatePicker(
+            widgetType: WidgetType.JContainer,
+            pickerType: PickerType.JNormal,
             buttons: const SizedBox(),
             primaryColor: Colors.red,
             calendarTextColor: Colors.black,
@@ -127,32 +154,9 @@ class HomePage extends StatelessWidget {
             pickerTheme: Theme.of(context),
             textDirection: TextDirection.rtl,
             onChange: (val) {
-              debugPrint(val.toString());
-              print(val.date);
+              debugPrint(val.date.toString());
             },
           ),
-          // JGlobalDatePicker(
-          //   widgetType: WidgetType.JContainer,
-          //   pickerType: PickerType.JNormal,
-          //   buttons: const SizedBox(),
-          //   primaryColor: Colors.red,
-          //   calendarTextColor: Colors.black,
-          //   backgroundColor: Colors.transparent
-          //   ,
-          //   borderRadius: const Radius.circular(10),
-          //   // headerTitle: const Center(
-          //   //   child: Text("التقويم الهجري"),
-          //   // ),
-          //   startDate: JDateModel(dateTime: DateTime.parse("1984-12-24")),
-          //   selectedDate: JDateModel(dateTime: DateTime.now()),
-          //   endDate: JDateModel(dateTime: DateTime.parse("2030-09-20")),
-          //   pickerMode: DatePickerMode.day,
-          //   pickerTheme: Theme.of(context),
-          //   textDirection: TextDirection.rtl,
-          //   onChange: (val) {
-          //     debugPrint(val.toString());
-          //   },
-          // ),
         ],
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );

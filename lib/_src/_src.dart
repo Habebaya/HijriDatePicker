@@ -22,7 +22,6 @@ const double _yearPickerRowHeight = 52.0;
 const double _yearPickerRowSpacing = 8.0;
 
 const double _subHeaderHeight = 52.0;
-const double _monthNavButtonsWidth = 108.0;
 
 /// Displays a grid of days for a given month and allows the user to select a
 /// date.
@@ -69,6 +68,7 @@ class JCalendarDatePicker extends StatefulWidget {
   ///
   /// If [selectableDayPredicate] is non-null, it must return `true` for the
   /// [initialDate].
+
   JCalendarDatePicker({
     super.key,
     required JHijri initialDate,
@@ -76,6 +76,7 @@ class JCalendarDatePicker extends StatefulWidget {
     required JHijri lastDate,
     JHijri? currentDate,
     required this.onDateChanged,
+    required this.specialDate,
     this.onDisplayedMonthChanged,
     this.initialCalendarMode = DatePickerMode.day,
     this.selectableDayPredicate,
@@ -130,6 +131,8 @@ class JCalendarDatePicker extends StatefulWidget {
   /// Function to provide full control over which dates in the calendar can be selected.
   final JSelectableDayPredicate? selectableDayPredicate;
 
+  final List<String> specialDate ;
+
   @override
   State<JCalendarDatePicker> createState() => _JCalendarDatePickerState();
 }
@@ -138,7 +141,6 @@ class _JCalendarDatePickerState extends State<JCalendarDatePicker> {
   bool _announcedInitialDate = false;
   late DatePickerMode _mode;
   late HijriDate _currentDisplayedMonthDate;
-  late DateTime _currentDisplayedMonthDateM;
 
   late HijriDate _selectedDate;
   final GlobalKey _monthPickerKey = GlobalKey();
@@ -157,11 +159,7 @@ class _JCalendarDatePickerState extends State<JCalendarDatePicker> {
             fMonth: widget.initialDate.month,
             fDay: widget.initialDate.day)
         .hijri;
-    _currentDisplayedMonthDateM = JHijri(
-            fYear: widget.initialDate.year,
-            fMonth: widget.initialDate.month,
-            fDay: widget.initialDate.day)
-        .dateTime;
+
     _selectedDate = widget.initialDate;
   }
 
@@ -255,6 +253,7 @@ class _JCalendarDatePickerState extends State<JCalendarDatePicker> {
     setState(() {
       _mode = DatePickerMode.day;
       _handleMonthChanged(value);
+
     });
   }
 
@@ -270,6 +269,7 @@ class _JCalendarDatePickerState extends State<JCalendarDatePicker> {
     switch (_mode) {
       case DatePickerMode.day:
         return _JMonthPicker(
+          specialDates: widget.specialDate,
           key: _monthPickerKey,
           initialMonth: _currentDisplayedMonthDate,
           currentDate: widget.currentDate,
@@ -486,7 +486,6 @@ class _JDatePickerModeToggleButtonState
     final ColorScheme colorScheme = Theme.of(context).colorScheme;
     final TextTheme textTheme = Theme.of(context).textTheme;
     final Color controlColor = colorScheme.onSurface.withOpacity(0.60);
-    final DateTime mDay = JHijri(fYear: 2024, fMonth: 3).dateTime;
     return Center(
       child: Container(
         padding: const EdgeInsetsDirectional.only(start: 16, end: 16),
@@ -555,6 +554,7 @@ class _JMonthPicker extends StatefulWidget {
   /// Creates a month picker.
   _JMonthPicker({
     super.key,
+    required this.specialDates,
     required this.initialMonth,
     required this.currentDate,
     required this.firstDate,
@@ -598,6 +598,8 @@ class _JMonthPicker extends StatefulWidget {
 
   /// Optional user supplied predicate function to customize selectable days.
   final JSelectableDayPredicate? selectableDayPredicate;
+  final List<String> specialDates;
+
 
   @override
   _JMonthPickerState createState() => _JMonthPickerState();
@@ -903,6 +905,7 @@ class _JMonthPickerState extends State<_JMonthPicker> {
       selectedDate: widget.selectedDate,
       currentDate: widget.currentDate,
       onChanged: _handleDateSelected,
+      specialDate: widget.specialDates,
       firstDate: widget.firstDate,
       lastDate: widget.lastDate,
       displayedMonth: month,
@@ -1031,6 +1034,7 @@ class _JDayPicker extends StatefulWidget {
     required this.firstDate,
     required this.lastDate,
     required this.selectedDate,
+    required this.specialDate,
     required this.onChanged,
     this.selectableDayPredicate,
   })  : assert(!firstDate.dateTime.isAfter(lastDate.dateTime)),
@@ -1060,7 +1064,7 @@ class _JDayPicker extends StatefulWidget {
 
   /// The month whose days are displayed by this picker.
   final HijriDate displayedMonth;
-
+  final List<String>? specialDate;
   /// Optional user supplied predicate function to customize selectable days.
   final JSelectableDayPredicate? selectableDayPredicate;
 
@@ -1071,27 +1075,27 @@ class _JDayPicker extends StatefulWidget {
 class _JDayPickerState extends State<_JDayPicker> {
   /// List of [FocusNode]s, one for each day of the month.
   late List<FocusNode> _dayFocusNodes;
-  late List<String> specialDate = [];
+  // late List<String> specialDate = [];
 
   @override
   void initState() {
     super.initState();
-    specialDate = [
-      "1/1",
-      "12/3",
-      "20/7",
-      "15/8",
-      "1/9",
-      "1/10",
-      "2/10",
-      "3/10",
-      "9/12",
-      '10/12',
-      "11/12",
-      "13/12",
-      "14/12"
-
-    ];
+    // specialDate = [
+    //   "1/1",
+    //   "12/3",
+    //   "20/7",
+    //   "15/8",
+    //   "1/9",
+    //   "1/10",
+    //   "2/10",
+    //   "3/10",
+    //   "9/12",
+    //   '10/12',
+    //   "11/12",
+    //   "13/12",
+    //   "14/12"
+    //
+    // ];
     final int daysInMonth = getDaysInAMonth(
         widget.displayedMonth.year, widget.displayedMonth.month);
     _dayFocusNodes = List<FocusNode>.generate(
@@ -1228,6 +1232,7 @@ class _JDayPickerState extends State<_JDayPicker> {
           ),
         ));
       } else {
+
         final HijriDate dayToBuild =
             JHijri(fYear: year, fMonth: month, fDay: day).hijri;
         final bool isDisabled =
@@ -1239,9 +1244,12 @@ class _JDayPickerState extends State<_JDayPicker> {
         final bool isToday = _isSameDay(widget.currentDate, dayToBuild);
         print(
             "dayToCompare ${dayToBuild.month.toString() + "/" + dayToBuild.day.toString()}");
-        print("special ${specialDate.first}");
-        final exist = specialDate.contains(
-            dayToBuild.day.toString() + "/" + dayToBuild.month.toString());
+        print("special ${widget.specialDate!.first}");
+         final melady = JHijri(fMonth: dayToBuild.month , fYear: dayToBuild.year, fDay: dayToBuild.day).dateTime;
+        print('melady : ${melady}');
+
+        final exist = widget.specialDate!.contains(
+            melady.day.toString() + "/" + melady.month.toString());
         print(exist);
 
         BoxDecoration? decoration;

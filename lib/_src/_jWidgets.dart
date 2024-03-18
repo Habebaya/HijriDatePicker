@@ -202,6 +202,7 @@ class JGlobalDatePicker extends StatelessWidget {
   final Locale? locale;
   final SelectableDayPredicate? selectableDayPredicate;
   final JSelectableDayPredicate? jSelectableDayPredicate;
+  final List<String>? specialDates;
 
   const JGlobalDatePicker(
       {Key? key,
@@ -229,6 +230,7 @@ class JGlobalDatePicker extends StatelessWidget {
       this.jSelectableDayPredicate,
       this.okButtonText,
       this.cancelButtonText,
+      this.specialDates,
       this.pickerTheme})
       : super(key: key);
 
@@ -273,27 +275,26 @@ class JGlobalDatePicker extends StatelessWidget {
                               clipBehavior: Clip.none,
                               fit: StackFit.loose,
                               children: [
-
                                 JCalendarDatePicker(
+                                  specialDate: specialDates!,
                                   initialDate: jCheckDate(selectedDate),
-                                      localeCode: locale?.languageCode ?? "ar",
+                                  localeCode: locale?.languageCode ?? "ar",
                                   firstDate: jCheckDate(startDate),
                                   initialCalendarMode:
                                       pickerMode ?? DatePickerMode.day,
                                   lastDate: jCheckDate(endDate),
-                                  selectableDayPredicate: jSelectableDayPredicate,
+                                  selectableDayPredicate:
+                                      jSelectableDayPredicate,
                                   onDateChanged: onChange != null
                                       ? (dateTime) => onChange!(JPickerValue.value(
-                                          JDateModel(
-                                              jhijri: JHijri(
-                                                  fDate: dateTime.dateTime))))
+                                      JDateModel(
+                                          jhijri: JHijri(
+                                              fDate: dateTime.dateTime))))
                                       : (dateTime) => selected = JPickerValue.value(
-                                          JDateModel(
-                                              jhijri: JHijri(
-                                                  fDate: dateTime.dateTime))),
+                                      JDateModel(
+                                          jhijri: JHijri(
+                                              fDate: dateTime.dateTime))),
                                 ),
-
-
                               ],
                             ),
                           if (pickerType == PickerType.JNormal)

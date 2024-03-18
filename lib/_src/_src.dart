@@ -5,6 +5,7 @@ import 'package:flutter/rendering.dart';
 import 'dart:math' as math;
 import 'package:flutter/services.dart';
 import 'package:jhijri/jHijri.dart';
+import 'package:intl/intl.dart' as initt;
 
 typedef JSelectableDayPredicate = bool Function(HijriDate day);
 
@@ -1277,7 +1278,7 @@ class _JDayPickerState extends State<_JDayPicker> {
             shape: BoxShape.rectangle,borderRadius: BorderRadius.circular(10),
           );
         }
-       else if (isSelectedDay && isToday) {
+        if (isSelectedDay && isToday) {
           // The selected day gets a circle background highlight, and a
           // contrasting text color.
           dayColor = selectedDayColor;
@@ -1313,9 +1314,9 @@ class _JDayPickerState extends State<_JDayPicker> {
             child: Center(
               child: Column(
                 children: [
-                  Text(localizations.formatDecimal(day),
+                  Text(initt.NumberFormat('#.##', 'ar_EG').format(day),
                       style: dayStyle.apply(color: dayColor)),
-                  Text(formatDate(mDay, ['d']),
+                  Text(initt.NumberFormat('#.##', 'ar_EG').format(mDay.day),
                       style: dayStyle.apply(color: dayColor)),
                 ],
               ),

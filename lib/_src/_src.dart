@@ -12,7 +12,7 @@ typedef JSelectableDayPredicate = bool Function(HijriDate day);
 const Duration _monthScrollDuration = Duration(milliseconds: 200);
 
 const double _dayPickerRowHeight = 42.0;
-const int _maxDayPickerRowCount = 6;
+const int _maxDayPickerRowCount = 7;
 const double _maxDayPickerHeight =
     _dayPickerRowHeight * (_maxDayPickerRowCount + 1);
 const double _monthPickerHorizontalPadding = 8.0;
@@ -1243,15 +1243,15 @@ class _JDayPickerState extends State<_JDayPicker> {
                     !widget.selectableDayPredicate!(dayToBuild));
         final bool isSelectedDay = _isSameDay(widget.selectedDate, dayToBuild);
         final bool isToday = _isSameDay(widget.currentDate, dayToBuild);
-        print(
-            "dayToCompare ${dayToBuild.month.toString() + "/" + dayToBuild.day.toString()}");
-        print("special ${widget.specialDate!.first}");
+        // print(
+        //     "dayToCompare ${dayToBuild.month.toString() + "/" + dayToBuild.day.toString()}");
+        // print("special ${widget.specialDate!.first}");
          final melady = JHijri(fMonth: dayToBuild.month , fYear: dayToBuild.year, fDay: dayToBuild.day).dateTime;
-        print('melady : ${melady}');
+        // print('melady : ${melady}');
 
         final exist = widget.specialDate!.contains(
             melady.day.toString() + "/" + melady.month.toString());
-        print(exist);
+        // print(exist);
 
         BoxDecoration? decoration;
         Color dayColor = enabledDayColor;

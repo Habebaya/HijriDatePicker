@@ -22,7 +22,7 @@ const double _yearPickerPadding = 16.0;
 const double _yearPickerRowHeight = 52.0;
 const double _yearPickerRowSpacing = 8.0;
 
-const double _subHeaderHeight = 52.0;
+const double _subHeaderHeight = 60.0;
 
 /// Displays a grid of days for a given month and allows the user to select a
 /// date.
@@ -489,20 +489,20 @@ class _JDatePickerModeToggleButtonState
     final Color controlColor = colorScheme.onSurface.withOpacity(0.60);
     return Center(
       child: Container(
-        padding: const EdgeInsetsDirectional.only(start: 16, end: 16),
-        height: _subHeaderHeight,
+        padding: const EdgeInsetsDirectional.only(start: 16, end: 16,top: 4,bottom: 4),
+        // height: _subHeaderHeight,
         width: MediaQuery.of(context).size.width * 0.6,
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(5),
             border: Border.all(color: Colors.black12)),
         child: SizedBox(
-          height: _subHeaderHeight,
+          // height: _subHeaderHeight,
           child: Column(
             children: [
               InkWell(
                 onTap: widget.onTitlePressed,
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 8),
+                  padding: const EdgeInsets.symmetric(horizontal: 8,vertical: 4),
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -511,13 +511,18 @@ class _JDatePickerModeToggleButtonState
                         widget.month,
                         overflow: TextOverflow.ellipsis,
                         style: textTheme.titleSmall?.copyWith(
-                            color: controlColor, fontWeight: FontWeight.w700),
+                            fontSize: 16,
+                            fontFamily: 'Almarai',
+                            color: Color(0xFF2C3735), fontWeight: FontWeight.w700),
                       ),
                       Text(
                         widget.year + 'هـ',
                         overflow: TextOverflow.ellipsis,
                         style: textTheme.titleSmall?.copyWith(
-                            color: controlColor, fontWeight: FontWeight.w400),
+
+                            fontSize: 16,
+                            fontFamily: 'Almarai',
+                            color: Color(0xFF2C3735), fontWeight: FontWeight.w700),
                       ),
 
                       // RotationTransition(
@@ -535,7 +540,8 @@ class _JDatePickerModeToggleButtonState
                 widget.monthInMelady,
                 overflow: TextOverflow.ellipsis,
                 style: textTheme.titleSmall?.copyWith(
-                    color: controlColor, fontWeight: FontWeight.w700),
+                  fontSize: 12,fontFamily: 'Almarai',
+                    color: Color(0xFF2C3735), fontWeight: FontWeight.w400),
               ),
             ],
           ),
@@ -1169,7 +1175,7 @@ class _JDayPickerState extends State<_JDayPicker> {
             child: FittedBox(
                 child: Text("${weekday}",
                     style: headerStyle!
-                        .copyWith(fontWeight: FontWeight.w700, fontSize: 14)))),
+                        .copyWith(fontWeight: FontWeight.w700, fontSize: 14,fontFamily: 'Almarai')))),
       ));
 
       /// { 0 } pick first day of week as sunday
@@ -1208,7 +1214,9 @@ class _JDayPickerState extends State<_JDayPicker> {
       color: colorScheme.onSurface.withOpacity(0.60),
     );
     final TextStyle dayStyle = textTheme.bodySmall!;
-    final Color enabledDayColor = colorScheme.onSurface.withOpacity(0.87);
+    // final Color enabledDayColor = colorScheme.onSurface.withOpacity(0.87);
+     final Color enabledDayColor = Color(0xFF2C3735);
+     final Color enabledDayColorSub = Color(0xFF499C87);
     final Color disabledDayColor = colorScheme.onSurface.withOpacity(0.38);
     final Color selectedDayColor = colorScheme.onPrimary;
     final Color selectedDayBackground = colorScheme.primary;
@@ -1229,7 +1237,7 @@ class _JDayPickerState extends State<_JDayPicker> {
       if (day < 1) {
         dayItems.add(Container(
           child: Center(
-            child: Text(""),
+            child: Text("") ,
           ),
         ));
       } else {
@@ -1255,10 +1263,12 @@ class _JDayPickerState extends State<_JDayPicker> {
 
         BoxDecoration? decoration;
         Color dayColor = enabledDayColor;
+        Color dayColorSub = enabledDayColorSub;
         if (isSelectedDay) {
           // The selected day gets a circle background highlight, and a
           // contrasting text color.
           dayColor = dayColor;
+          dayColorSub = dayColorSub;
           decoration = BoxDecoration(
               // color: selectedDayBackground,
               shape: BoxShape.rectangle,
@@ -1268,10 +1278,12 @@ class _JDayPickerState extends State<_JDayPicker> {
           );
         } else if (isDisabled) {
           dayColor = disabledDayColor;
+          dayColorSub = disabledDayColor;
         } else if (isToday) {
           // The current day gets a different text color and a circle stroke
           // border.
           dayColor = selectedDayColor;
+          dayColorSub = selectedDayColor;
           decoration = BoxDecoration(
             color: todayColor,
             // border: Border.all(color: todayColor),
@@ -1282,6 +1294,7 @@ class _JDayPickerState extends State<_JDayPicker> {
           // The selected day gets a circle background highlight, and a
           // contrasting text color.
           dayColor = selectedDayColor;
+          dayColorSub = selectedDayColor;
           decoration = BoxDecoration(
             color: selectedDayBackground,
             shape: BoxShape.rectangle,
@@ -1297,7 +1310,7 @@ class _JDayPickerState extends State<_JDayPicker> {
 
           decoration: decoration,
           child: Container(
-            margin: EdgeInsets.only(bottom: 2,left: 2,right: 2),
+            margin: EdgeInsets.only(bottom: 2,left: 2,right: 2,top: 2),
             decoration: BoxDecoration(
                 border: Border(
                     bottom: exist
@@ -1315,9 +1328,9 @@ class _JDayPickerState extends State<_JDayPicker> {
               child: Column(
                 children: [
                   Text(initt.NumberFormat('#.##', 'ar_EG').format(day),
-                      style: dayStyle.apply(color: dayColor)),
+                      style: dayStyle.apply(color: dayColor,fontFamily: 'Almarai',).copyWith(fontWeight: FontWeight.w600,fontSize: 14)),
                   Text(initt.NumberFormat('#.##', 'ar_EG').format(mDay.day),
-                      style: dayStyle.apply(color: dayColor)),
+                      style: dayStyle.apply(color: dayColorSub,fontFamily: 'Almarai',).copyWith(fontWeight: FontWeight.w600,fontSize: 10)),
                 ],
               ),
             ),

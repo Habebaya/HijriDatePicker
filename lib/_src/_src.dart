@@ -517,6 +517,7 @@ class _JDatePickerModeToggleButtonState
                               fontSize: 16,
                               fontFamily: 'Almarai',
                               color: Color(0xFF2C3735), fontWeight: FontWeight.w700),
+
                         ),
                         Text(
                           widget.year + 'هـ',
@@ -1329,17 +1330,15 @@ class _JDayPickerState extends State<_JDayPicker> {
                     ))
             ),
             child: Center(
-              child: Column(
-                children: [
-                  FittedBox(
-                    child: Text(initt.NumberFormat('#.##', 'ar_EG').format(day),
+              child: FittedBox(
+                child: Column(
+                  children: [
+                    Text(initt.NumberFormat('#.##', 'ar_EG').format(day),
                         style: dayStyle.apply(color: dayColor,fontFamily: 'Almarai',).copyWith(fontWeight: FontWeight.w600,fontSize: 14)),
-                  ),
-                  FittedBox(
-                    child: Text(initt.NumberFormat('#.##', 'ar_EG').format(mDay.day),
+                    Text(initt.NumberFormat('#.##', 'ar_EG').format(mDay.day),
                         style: dayStyle.apply(color: dayColorSub,fontFamily: 'Almarai',).copyWith(fontWeight: FontWeight.w600,fontSize: 10)),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           ),

@@ -1,9 +1,11 @@
 import 'package:date_format/date_format.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'dart:math' as math;
 import 'package:flutter/services.dart';
+import 'package:flutter/widgets.dart';
 import 'package:jhijri/jHijri.dart';
 import 'package:intl/intl.dart' as initt;
 
@@ -503,36 +505,38 @@ class _JDatePickerModeToggleButtonState
                 onTap: widget.onTitlePressed,
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 8,vertical: 4),
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Text(
-                        widget.month,
-                        overflow: TextOverflow.ellipsis,
-                        style: textTheme.titleSmall?.copyWith(
-                            fontSize: 16,
-                            fontFamily: 'Almarai',
-                            color: Color(0xFF2C3735), fontWeight: FontWeight.w700),
-                      ),
-                      Text(
-                        widget.year + 'هـ',
-                        overflow: TextOverflow.ellipsis,
-                        style: textTheme.titleSmall?.copyWith(
-
-                            fontSize: 16,
-                            fontFamily: 'Almarai',
-                            color: Color(0xFF2C3735), fontWeight: FontWeight.w700),
-                      ),
-
-                      // RotationTransition(
-                      //   turns: _controller,
-                      //   child: Icon(
-                      //     Icons.arrow_drop_down,
-                      //     color: controlColor,
-                      //   ),
-                      // ),
-                    ],
+                  child: FittedBox(
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Text(
+                          widget.month,
+                          overflow: TextOverflow.ellipsis,
+                          style: textTheme.titleSmall?.copyWith(
+                              fontSize: 16,
+                              fontFamily: 'Almarai',
+                              color: Color(0xFF2C3735), fontWeight: FontWeight.w700),
+                        ),
+                        Text(
+                          widget.year + 'هـ',
+                          overflow: TextOverflow.ellipsis,
+                          style: textTheme.titleSmall?.copyWith(
+                    
+                              fontSize: 16,
+                              fontFamily: 'Almarai',
+                              color: Color(0xFF2C3735), fontWeight: FontWeight.w700),
+                        ),
+                    
+                        // RotationTransition(
+                        //   turns: _controller,
+                        //   child: Icon(
+                        //     Icons.arrow_drop_down,
+                        //     color: controlColor,
+                        //   ),
+                        // ),
+                      ],
+                    ),
                   ),
                 ),
               ),
@@ -1327,10 +1331,14 @@ class _JDayPickerState extends State<_JDayPicker> {
             child: Center(
               child: Column(
                 children: [
-                  Text(initt.NumberFormat('#.##', 'ar_EG').format(day),
-                      style: dayStyle.apply(color: dayColor,fontFamily: 'Almarai',).copyWith(fontWeight: FontWeight.w600,fontSize: 14)),
-                  Text(initt.NumberFormat('#.##', 'ar_EG').format(mDay.day),
-                      style: dayStyle.apply(color: dayColorSub,fontFamily: 'Almarai',).copyWith(fontWeight: FontWeight.w600,fontSize: 10)),
+                  FittedBox(
+                    child: Text(initt.NumberFormat('#.##', 'ar_EG').format(day),
+                        style: dayStyle.apply(color: dayColor,fontFamily: 'Almarai',).copyWith(fontWeight: FontWeight.w600,fontSize: 14)),
+                  ),
+                  FittedBox(
+                    child: Text(initt.NumberFormat('#.##', 'ar_EG').format(mDay.day),
+                        style: dayStyle.apply(color: dayColorSub,fontFamily: 'Almarai',).copyWith(fontWeight: FontWeight.w600,fontSize: 10)),
+                  ),
                 ],
               ),
             ),

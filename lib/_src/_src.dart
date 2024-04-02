@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:date_format/date_format.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
@@ -1177,10 +1178,10 @@ class _JDayPickerState extends State<_JDayPicker> {
 
       result.add(ExcludeSemantics(
         child: Center(
-            child: FittedBox(
-                child: Text("${weekday}",
-                    style: headerStyle!
-                        .copyWith(fontWeight: FontWeight.w700, fontSize: 14,fontFamily: 'Almarai')))),
+            child: AutoSizeText("${weekday}",
+                maxLines: 1,
+                style: headerStyle!
+                    .copyWith(fontWeight: FontWeight.w700, fontSize: 14,fontFamily: 'Almarai'))),
       ));
 
       /// { 0 } pick first day of week as sunday

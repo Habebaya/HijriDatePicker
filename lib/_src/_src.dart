@@ -506,39 +506,39 @@ class _JDatePickerModeToggleButtonState
                 onTap: widget.onTitlePressed,
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 8,vertical: 4),
-                  child: FittedBox(
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        Text(
-                          widget.month,
-                          overflow: TextOverflow.ellipsis,
-                          style: textTheme.titleSmall?.copyWith(
-                              fontSize: 16,
-                              fontFamily: 'Almarai',
-                              color: Color(0xFF2C3735), fontWeight: FontWeight.w700),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      AutoSizeText(
+                        maxLines: 1,
+                        widget.month,
+                        overflow: TextOverflow.ellipsis,
+                        style: textTheme.titleSmall?.copyWith(
+                            fontSize: 16,
+                            fontFamily: 'Almarai',
+                            color: Color(0xFF2C3735), fontWeight: FontWeight.w700),
 
-                        ),
-                        Text(
-                          widget.year + 'هـ',
-                          overflow: TextOverflow.ellipsis,
-                          style: textTheme.titleSmall?.copyWith(
-                    
-                              fontSize: 16,
-                              fontFamily: 'Almarai',
-                              color: Color(0xFF2C3735), fontWeight: FontWeight.w700),
-                        ),
-                    
-                        // RotationTransition(
-                        //   turns: _controller,
-                        //   child: Icon(
-                        //     Icons.arrow_drop_down,
-                        //     color: controlColor,
-                        //   ),
-                        // ),
-                      ],
-                    ),
+                      ),
+                      AutoSizeText(
+                        maxLines: 1,
+                        widget.year + 'هـ',
+                        overflow: TextOverflow.ellipsis,
+                        style: textTheme.titleSmall?.copyWith(
+
+                            fontSize: 16,
+                            fontFamily: 'Almarai',
+                            color: Color(0xFF2C3735), fontWeight: FontWeight.w700),
+                      ),
+
+                      // RotationTransition(
+                      //   turns: _controller,
+                      //   child: Icon(
+                      //     Icons.arrow_drop_down,
+                      //     color: controlColor,
+                      //   ),
+                      // ),
+                    ],
                   ),
                 ),
               ),

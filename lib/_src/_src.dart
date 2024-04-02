@@ -135,7 +135,7 @@ class JCalendarDatePicker extends StatefulWidget {
   /// Function to provide full control over which dates in the calendar can be selected.
   final JSelectableDayPredicate? selectableDayPredicate;
 
-  final List<String> specialDate ;
+  final List<String> specialDate;
 
   @override
   State<JCalendarDatePicker> createState() => _JCalendarDatePickerState();
@@ -257,7 +257,6 @@ class _JCalendarDatePickerState extends State<JCalendarDatePicker> {
     setState(() {
       _mode = DatePickerMode.day;
       _handleMonthChanged(value);
-
     });
   }
 
@@ -492,7 +491,8 @@ class _JDatePickerModeToggleButtonState
     final Color controlColor = colorScheme.onSurface.withOpacity(0.60);
     return Center(
       child: Container(
-        padding: const EdgeInsetsDirectional.only(start: 16, end: 16,top: 4,bottom: 4),
+        padding: const EdgeInsetsDirectional.only(
+            start: 16, end: 16, top: 4, bottom: 4),
         // height: _subHeaderHeight,
         width: MediaQuery.of(context).size.width * 0.6,
         decoration: BoxDecoration(
@@ -505,7 +505,8 @@ class _JDatePickerModeToggleButtonState
               InkWell(
                 onTap: widget.onTitlePressed,
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 8,vertical: 4),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -517,18 +518,18 @@ class _JDatePickerModeToggleButtonState
                         style: textTheme.titleSmall?.copyWith(
                             fontSize: 16,
                             fontFamily: 'Almarai',
-                            color: Color(0xFF2C3735), fontWeight: FontWeight.w700),
-
+                            color: Color(0xFF2C3735),
+                            fontWeight: FontWeight.w700),
                       ),
                       AutoSizeText(
                         maxLines: 1,
                         widget.year + 'هـ',
                         overflow: TextOverflow.ellipsis,
                         style: textTheme.titleSmall?.copyWith(
-
                             fontSize: 16,
                             fontFamily: 'Almarai',
-                            color: Color(0xFF2C3735), fontWeight: FontWeight.w700),
+                            color: Color(0xFF2C3735),
+                            fontWeight: FontWeight.w700),
                       ),
 
                       // RotationTransition(
@@ -547,8 +548,10 @@ class _JDatePickerModeToggleButtonState
                 widget.monthInMelady,
                 overflow: TextOverflow.ellipsis,
                 style: textTheme.titleSmall?.copyWith(
-                  fontSize: 12,fontFamily: 'Almarai',
-                    color: Color(0xFF2C3735), fontWeight: FontWeight.w400),
+                    fontSize: 12,
+                    fontFamily: 'Almarai',
+                    color: Color(0xFF2C3735),
+                    fontWeight: FontWeight.w400),
               ),
             ],
           ),
@@ -613,7 +616,6 @@ class _JMonthPicker extends StatefulWidget {
   /// Optional user supplied predicate function to customize selectable days.
   final JSelectableDayPredicate? selectableDayPredicate;
   final List<String> specialDates;
-
 
   @override
   _JMonthPickerState createState() => _JMonthPickerState();
@@ -1079,6 +1081,7 @@ class _JDayPicker extends StatefulWidget {
   /// The month whose days are displayed by this picker.
   final HijriDate displayedMonth;
   final List<String>? specialDate;
+
   /// Optional user supplied predicate function to customize selectable days.
   final JSelectableDayPredicate? selectableDayPredicate;
 
@@ -1089,27 +1092,13 @@ class _JDayPicker extends StatefulWidget {
 class _JDayPickerState extends State<_JDayPicker> {
   /// List of [FocusNode]s, one for each day of the month.
   late List<FocusNode> _dayFocusNodes;
+
   // late List<String> specialDate = [];
 
   @override
   void initState() {
     super.initState();
-    // specialDate = [
-    //   "1/1",
-    //   "12/3",
-    //   "20/7",
-    //   "15/8",
-    //   "1/9",
-    //   "1/10",
-    //   "2/10",
-    //   "3/10",
-    //   "9/12",
-    //   '10/12',
-    //   "11/12",
-    //   "13/12",
-    //   "14/12"
-    //
-    // ];
+
     final int daysInMonth = getDaysInAMonth(
         widget.displayedMonth.year, widget.displayedMonth.month);
     _dayFocusNodes = List<FocusNode>.generate(
@@ -1179,10 +1168,16 @@ class _JDayPickerState extends State<_JDayPicker> {
 
       result.add(ExcludeSemantics(
         child: Center(
-            child: AutoSizeText("${weekday}",
+            child: AutoSizeText(
+              "${weekday}",
+              maxLines: 1,
 
-                style: headerStyle!
-                    .copyWith(fontWeight: FontWeight.w700, fontSize: 13,fontFamily: 'Almarai'))),
+              style: headerStyle!.copyWith(
+                  fontWeight: FontWeight.w700,
+                  fontSize: 14,
+                  fontFamily: 'Almarai'),
+              textAlign: TextAlign.center,
+            )),
       ));
 
       /// { 0 } pick first day of week as sunday
@@ -1222,8 +1217,8 @@ class _JDayPickerState extends State<_JDayPicker> {
     );
     final TextStyle dayStyle = textTheme.bodySmall!;
     // final Color enabledDayColor = colorScheme.onSurface.withOpacity(0.87);
-     final Color enabledDayColor = Color(0xFF2C3735);
-     final Color enabledDayColorSub = Color(0xFF499C87);
+    final Color enabledDayColor = Color(0xFF2C3735);
+    final Color enabledDayColorSub = Color(0xFF499C87);
     final Color disabledDayColor = colorScheme.onSurface.withOpacity(0.38);
     final Color selectedDayColor = colorScheme.onPrimary;
     final Color selectedDayBackground = colorScheme.primary;
@@ -1244,11 +1239,10 @@ class _JDayPickerState extends State<_JDayPicker> {
       if (day < 1) {
         dayItems.add(Container(
           child: Center(
-            child: Text("") ,
+            child: Text(""),
           ),
         ));
       } else {
-
         final HijriDate dayToBuild =
             JHijri(fYear: year, fMonth: month, fDay: day).hijri;
         final bool isDisabled =
@@ -1261,11 +1255,15 @@ class _JDayPickerState extends State<_JDayPicker> {
         // print(
         //     "dayToCompare ${dayToBuild.month.toString() + "/" + dayToBuild.day.toString()}");
         // print("special ${widget.specialDate!.first}");
-         final melady = JHijri(fMonth: dayToBuild.month , fYear: dayToBuild.year, fDay: dayToBuild.day).dateTime;
+        final melady = JHijri(
+                fMonth: dayToBuild.month,
+                fYear: dayToBuild.year,
+                fDay: dayToBuild.day)
+            .dateTime;
         // print('melady : ${melady}');
 
-        final exist = widget.specialDate!.contains(
-            melady.day.toString() + "/" + melady.month.toString());
+        final exist = widget.specialDate!
+            .contains(melady.day.toString() + "/" + melady.month.toString());
         // print(exist);
 
         BoxDecoration? decoration;
@@ -1277,11 +1275,10 @@ class _JDayPickerState extends State<_JDayPicker> {
           dayColor = dayColor;
           dayColorSub = dayColorSub;
           decoration = BoxDecoration(
-              // color: selectedDayBackground,
-              shape: BoxShape.rectangle,
-              border: Border.all(color: disabledDayColor),
-              borderRadius: BorderRadius.circular(5),
-
+            // color: selectedDayBackground,
+            shape: BoxShape.rectangle,
+            border: Border.all(color: disabledDayColor),
+            borderRadius: BorderRadius.circular(5),
           );
         } else if (isDisabled) {
           dayColor = disabledDayColor;
@@ -1294,7 +1291,7 @@ class _JDayPickerState extends State<_JDayPicker> {
           decoration = BoxDecoration(
             color: todayColor,
             // border: Border.all(color: todayColor),
-            shape: BoxShape.rectangle,borderRadius: BorderRadius.circular(10),
+            shape: BoxShape.rectangle, borderRadius: BorderRadius.circular(10),
           );
         }
         if (isSelectedDay && isToday) {
@@ -1306,7 +1303,6 @@ class _JDayPickerState extends State<_JDayPicker> {
             color: selectedDayBackground,
             shape: BoxShape.rectangle,
             borderRadius: BorderRadius.circular(10),
-
           );
         }
 
@@ -1314,31 +1310,41 @@ class _JDayPickerState extends State<_JDayPicker> {
             JHijri(fYear: year, fMonth: month, fDay: day).dateTime;
 
         Widget dayWidget = Container(
-
           decoration: decoration,
           child: Container(
-            margin: EdgeInsets.only(bottom: 2,left: 2,right: 2,top: 2),
+            margin: EdgeInsets.only(bottom: 2, left: 2, right: 2, top: 2),
             decoration: BoxDecoration(
                 border: Border(
                     bottom: exist
                         ? BorderSide(
-                      //                   <--- left side
-                      color: Color(0xFF84B230),
-                      width: 3.0,
-                    )
+                            //                   <--- left side
+                            color: Color(0xFF84B230),
+                            width: 3.0,
+                          )
                         : BorderSide(
-                      //                   <--- left side
-                      color: Colors.transparent,
-                    ))
-            ),
+                            //                   <--- left side
+                            color: Colors.transparent,
+                          ))),
             child: Center(
               child: FittedBox(
                 child: Column(
                   children: [
                     Text(initt.NumberFormat('#.##', 'ar_EG').format(day),
-                        style: dayStyle.apply(color: dayColor,fontFamily: 'Almarai',).copyWith(fontWeight: FontWeight.w600,fontSize: 14)),
+                        style: dayStyle
+                            .apply(
+                              color: dayColor,
+                              fontFamily: 'Almarai',
+                            )
+                            .copyWith(
+                                fontWeight: FontWeight.w600, fontSize: 14)),
                     Text(initt.NumberFormat('#.##', 'ar_EG').format(mDay.day),
-                        style: dayStyle.apply(color: dayColorSub,fontFamily: 'Almarai',).copyWith(fontWeight: FontWeight.w600,fontSize: 10)),
+                        style: dayStyle
+                            .apply(
+                              color: dayColorSub,
+                              fontFamily: 'Almarai',
+                            )
+                            .copyWith(
+                                fontWeight: FontWeight.w600, fontSize: 10)),
                   ],
                 ),
               ),
@@ -1376,10 +1382,9 @@ class _JDayPickerState extends State<_JDayPicker> {
     }
 
     return Padding(
-      padding: const EdgeInsets.symmetric(
-        horizontal: _monthPickerHorizontalPadding,
-      ),
+      padding: const EdgeInsets.symmetric(horizontal: 2),
       child: GridView.custom(
+        padding: EdgeInsets.zero,
         physics: const ClampingScrollPhysics(),
         gridDelegate: _dayPickerGridDelegate,
         childrenDelegate: SliverChildListDelegate(
@@ -1397,17 +1402,17 @@ class _JDayPickerGridDelegate extends SliverGridDelegate {
   @override
   SliverGridLayout getLayout(SliverConstraints constraints) {
     const int columnCount = 7;
-    final double tileWidth = constraints.crossAxisExtent / columnCount;
+    final double tileWidth = constraints.crossAxisExtent / 7;
     final double tileHeight = math.min(
       _dayPickerRowHeight,
-      constraints.viewportMainAxisExtent / (_maxDayPickerRowCount + 1),
+      constraints.viewportMainAxisExtent / (_maxDayPickerRowCount + 0.5),
     );
     return SliverGridRegularTileLayout(
-      childCrossAxisExtent: 40,
+      childCrossAxisExtent: 50,
       childMainAxisExtent: tileHeight,
       crossAxisCount: columnCount,
       crossAxisStride: tileWidth,
-      mainAxisStride: 50,
+      mainAxisStride: 45,
       reverseCrossAxis: axisDirectionIsReversed(constraints.crossAxisDirection),
     );
   }

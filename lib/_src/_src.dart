@@ -1168,15 +1168,17 @@ class _JDayPickerState extends State<_JDayPicker> {
 
       result.add(ExcludeSemantics(
         child: Center(
-            child: AutoSizeText(
-              "${weekday}",
-              maxLines: 1,
-
-              style: headerStyle!.copyWith(
-                  fontWeight: FontWeight.w700,
-                  fontSize: 14,
-                  fontFamily: 'Almarai'),
-              textAlign: TextAlign.center,
+            child: FittedBox(
+              child: AutoSizeText(
+                "${weekday}",
+                maxLines: 1,
+              
+                style: headerStyle!.copyWith(
+                    fontWeight: FontWeight.w700,
+                    fontSize: 14,
+                    fontFamily: 'Almarai'),
+                textAlign: TextAlign.center,
+              ),
             )),
       ));
 
@@ -1405,7 +1407,7 @@ class _JDayPickerGridDelegate extends SliverGridDelegate {
     final double tileWidth = constraints.crossAxisExtent / 7;
     final double tileHeight = math.min(
       _dayPickerRowHeight,
-      constraints.viewportMainAxisExtent / (_maxDayPickerRowCount + 1),
+      constraints.viewportMainAxisExtent / (_maxDayPickerRowCount + 0.3),
     );
     return SliverGridRegularTileLayout(
       childCrossAxisExtent: 50,

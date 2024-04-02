@@ -1412,7 +1412,7 @@ class _JDayPickerGridDelegate extends SliverGridDelegate {
       childMainAxisExtent: tileHeight,
       crossAxisCount: columnCount,
       crossAxisStride: tileWidth,
-      mainAxisStride: 45,
+      mainAxisStride: 50,
       reverseCrossAxis: axisDirectionIsReversed(constraints.crossAxisDirection),
     );
   }

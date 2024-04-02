@@ -542,7 +542,8 @@ class _JDatePickerModeToggleButtonState
                   ),
                 ),
               ),
-              Text(
+              AutoSizeText(
+                maxLines: 1,
                 widget.monthInMelady,
                 overflow: TextOverflow.ellipsis,
                 style: textTheme.titleSmall?.copyWith(
@@ -1179,9 +1180,9 @@ class _JDayPickerState extends State<_JDayPicker> {
       result.add(ExcludeSemantics(
         child: Center(
             child: AutoSizeText("${weekday}",
-                maxLines: 1,
+
                 style: headerStyle!
-                    .copyWith(fontWeight: FontWeight.w700, fontSize: 14,fontFamily: 'Almarai'))),
+                    .copyWith(fontWeight: FontWeight.w700, fontSize: 13,fontFamily: 'Almarai'))),
       ));
 
       /// { 0 } pick first day of week as sunday

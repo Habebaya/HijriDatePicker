@@ -107,6 +107,7 @@ class HomePage extends StatelessWidget {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
+
           Container(
             child: JGlobalDatePicker(
               specialDates: [
@@ -127,8 +128,7 @@ class HomePage extends StatelessWidget {
               pickerTheme: Theme.of(context),
               textDirection: TextDirection.rtl,
               onChange: (val) {
-                debugPrint("ad" + val.toString());
-                print("woww : ${val.date}");
+
               },
             ),
           ),

@@ -1177,7 +1177,7 @@ class _JDayPickerState extends State<_JDayPicker> {
 
               fontFamily: 'Almarai'),
           textAlign: TextAlign.center,
-          textScaleFactor:1.12
+          textScaleFactor:1.0
 
                     ),
       ));

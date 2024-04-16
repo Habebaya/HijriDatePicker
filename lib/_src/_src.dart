@@ -1173,7 +1173,7 @@ class _JDayPickerState extends State<_JDayPicker> {
           // overflow: TextOverflow.ellipsis,
           style: headerStyle!.copyWith(
               fontWeight: FontWeight.w700,
-              fontSize: 14,
+              fontSize: 12,
 
               fontFamily: 'Almarai'),
           textAlign: TextAlign.center,

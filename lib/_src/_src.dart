@@ -1167,25 +1167,19 @@ class _JDayPickerState extends State<_JDayPicker> {
       String weekday = dayNamesInArabic[i];
 
       result.add(ExcludeSemantics(
-        child: Row(
-          children: [
-            Expanded(
-              flex: 2,
+        child: Text(
+          "${weekday}",
+          maxLines: 1,
+          // overflow: TextOverflow.ellipsis,
+          style: headerStyle!.copyWith(
+              fontWeight: FontWeight.w700,
+              fontSize: 14,
 
-              child: Text(
-                "${weekday}",
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-                style: headerStyle!.copyWith(
-                    fontWeight: FontWeight.w700,
-                    fontSize: 14,
-                    fontFamily: 'Almarai'),
-                textAlign: TextAlign.center,
+              fontFamily: 'Almarai'),
+          textAlign: TextAlign.center,
+          textScaleFactor:1.12
 
-                          ),
-            ),
-          ],
-        ),
+                    ),
       ));
 
       /// { 0 } pick first day of week as sunday

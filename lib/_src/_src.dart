@@ -1153,18 +1153,18 @@ class _JDayPickerState extends State<_JDayPicker> {
       TextStyle? headerStyle, MaterialLocalizations localizations) {
     final List<Widget> result = <Widget>[];
     List<String> dayNamesInArabic = [
-      "الآحد",
-      "الإثنين",
-      "الثلاثاء",
-      "الأربعاء",
-      "الخميس",
-      "الجمعة",
-      "السبت",
+      "أحد",
+      "أثنين",
+      "ثلاثاء",
+      "أربعاء",
+      "خميس",
+      "جمعة",
+      "سبت",
     ];
 
     /// { 0 } pick first day of week as sunday
     for (int i = 0; true; i = (i + 1) % 7) {
-      String weekday = localizations.narrowWeekdays[i];
+      String weekday = dayNamesInArabic[i];
 
       result.add(ExcludeSemantics(
         child: Text(

@@ -1164,7 +1164,7 @@ class _JDayPickerState extends State<_JDayPicker> {
 
     /// { 0 } pick first day of week as sunday
     for (int i = 0; true; i = (i + 1) % 7) {
-      String weekday = dayNamesInArabic[i];
+      String weekday = localizations.narrowWeekdays[i];
 
       result.add(ExcludeSemantics(
         child: Text(
@@ -1173,11 +1173,9 @@ class _JDayPickerState extends State<_JDayPicker> {
           // overflow: TextOverflow.ellipsis,
           style: headerStyle!.copyWith(
               fontWeight: FontWeight.w700,
-              fontSize: 12,
-
+              fontSize: 14,
               fontFamily: 'Almarai'),
           textAlign: TextAlign.center,
-          textScaleFactor:1.0
 
                     ),
       ));
@@ -1414,7 +1412,7 @@ class _JDayPickerGridDelegate extends SliverGridDelegate {
       childMainAxisExtent: tileHeight,
       crossAxisCount: columnCount,
       crossAxisStride: tileWidth,
-      mainAxisStride: 55,
+      mainAxisStride: 50,
       reverseCrossAxis: axisDirectionIsReversed(constraints.crossAxisDirection),
     );
   }

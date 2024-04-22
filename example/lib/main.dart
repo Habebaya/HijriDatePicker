@@ -18,8 +18,11 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.deepPurple,
       ),
       debugShowCheckedModeBanner: false,
-      home: const HomePage(),
-    );
+      home: MediaQuery.withClampedTextScaling(
+    minScaleFactor:
+         1.25,
+    child: HomePage()
+    ));
   }
 }
 

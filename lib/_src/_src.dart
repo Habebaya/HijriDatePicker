@@ -1159,7 +1159,7 @@ class _JDayPickerState extends State<_JDayPicker> {
       "أربعاء",
       "خميس",
       "جمعة",
-      "سبت",
+      "خميس",
     ];
 
     /// { 0 } pick first day of week as sunday
@@ -1173,11 +1173,9 @@ class _JDayPickerState extends State<_JDayPicker> {
           // overflow: TextOverflow.ellipsis,
           style: headerStyle!.copyWith(
               fontWeight: FontWeight.w700,
-              fontSize: 14,
+              fontSize: 13,
               fontFamily: 'Almarai'),
-          textAlign: TextAlign.center,
-
-                    ),
+          textAlign: TextAlign.center,),
       ));
 
       /// { 0 } pick first day of week as sunday

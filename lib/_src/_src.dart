@@ -1164,7 +1164,7 @@ class _JDayPickerState extends State<_JDayPicker> {
 
     /// { 0 } pick first day of week as sunday
     for (int i = 0; true; i = (i + 1) % 7) {
-      String weekday = dayNamesInArabic[i];
+      String weekday = localizations.narrowWeekdays[i];
 
       result.add(ExcludeSemantics(
         child: Text(

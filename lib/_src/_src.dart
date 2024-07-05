@@ -1159,7 +1159,7 @@ class _JDayPickerState extends State<_JDayPicker> {
       "أربعاء",
       "خميس",
       "جمعة",
-      "خميس",
+      "سبت",
     ];
 
     /// { 0 } pick first day of week as sunday

@@ -1,4 +1,4 @@
- import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'package:jhijri/jHijri.dart';
 import '_src.dart';
 
@@ -203,6 +203,14 @@ class JGlobalDatePicker extends StatelessWidget {
   final SelectableDayPredicate? selectableDayPredicate;
   final JSelectableDayPredicate? jSelectableDayPredicate;
   final List<String>? specialDates;
+  final bool? showGregorianDate;
+
+  final bool? showHijriDate;
+
+  final TextStyle? gregorianDayTextStyle;
+  final TextStyle? hijriDayTextStyle;
+  final bool? showGregorianMonth;
+  final bool? showHijriMonth;
 
   const JGlobalDatePicker(
       {Key? key,
@@ -231,6 +239,12 @@ class JGlobalDatePicker extends StatelessWidget {
       this.okButtonText,
       this.cancelButtonText,
       this.specialDates,
+      this.showGregorianDate = true,
+      this.showHijriDate = false,
+        this.showGregorianMonth = true,
+        this.showHijriMonth = false,
+      this.gregorianDayTextStyle = const TextStyle(color: Colors.black,fontSize: 14,fontWeight: FontWeight.w600),
+      this.hijriDayTextStyle= const TextStyle(color: Colors.blue,fontSize: 10,fontWeight: FontWeight.w600),
       this.pickerTheme})
       : super(key: key);
 
@@ -276,7 +290,14 @@ class JGlobalDatePicker extends StatelessWidget {
                               fit: StackFit.loose,
                               children: [
                                 JCalendarDatePicker(
+                                  gregorianDayTextStyle: gregorianDayTextStyle!,
+                                  hijriDayTextStyle: hijriDayTextStyle,
+                                  showGregorianDate: showGregorianDate!,
+                                  showHijriDate: showHijriDate!,
+                                  showGregorianMonth: showGregorianMonth!,
+                                  showHijriMonth: showHijriMonth!,
                                   specialDate: specialDates!,
+
                                   initialDate: jCheckDate(selectedDate),
                                   localeCode: locale?.languageCode ?? "ar",
                                   firstDate: jCheckDate(startDate),
@@ -286,14 +307,14 @@ class JGlobalDatePicker extends StatelessWidget {
                                   selectableDayPredicate:
                                       jSelectableDayPredicate,
                                   onDateChanged: onChange != null
-                                      ? (dateTime) => onChange!(JPickerValue.value(
-                                      JDateModel(
-                                          jhijri: JHijri(
-                                              fDate: dateTime.dateTime))))
-                                      : (dateTime) => selected = JPickerValue.value(
-                                      JDateModel(
-                                          jhijri: JHijri(
-                                              fDate: dateTime.dateTime))),
+                                      ? (dateTime) => onChange!(
+                                          JPickerValue.value(JDateModel(
+                                              jhijri: JHijri(
+                                                  fDate: dateTime.dateTime))))
+                                      : (dateTime) => selected =
+                                          JPickerValue.value(JDateModel(
+                                              jhijri: JHijri(
+                                                  fDate: dateTime.dateTime))),
                                 ),
                               ],
                             ),

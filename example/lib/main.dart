@@ -117,6 +117,13 @@ class HomePage extends StatelessWidget {
                 "6/6",
                 "29/10"
               ],
+              showGregorianDate: true,
+              showHijriDate: true,
+              showHijriMonth: true,
+              showGregorianMonth: false,
+              // gregorianDayTextStyle: TextStyle(color: Colors.black),
+              // hijriDayTextStyle: TextStyle(color: Colors.cyan),
+
               widgetType: WidgetType.JContainer,
               pickerType: PickerType.JHijri,
               buttons: const SizedBox(),
@@ -127,6 +134,7 @@ class HomePage extends StatelessWidget {
               startDate: JDateModel(dateTime: DateTime.parse("1984-12-24")),
               selectedDate: JDateModel(dateTime: DateTime.now()),
               endDate: JDateModel(dateTime: DateTime.parse("2030-09-20")),
+
               pickerMode: DatePickerMode.day,
               pickerTheme: Theme.of(context),
               textDirection: TextDirection.rtl,
